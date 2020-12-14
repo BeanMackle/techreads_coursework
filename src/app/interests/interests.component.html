@@ -1,0 +1,57 @@
+<div *ngIf="displayInterest">
+
+  <div class="form-group text-center">
+    <fieldset class="form-group">
+      <legend >Interests</legend>
+      <p>Select new Interests and click submit!</p>
+      <div *ngFor="let interest of displayInterest">
+        <div *ngIf="interest.interest; else nonInterest">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" value="" checked="true" [id]="interest.category" disabled>
+              {{interest.category}}
+            </label>
+          </div>
+        </div>
+        <ng-template #nonInterest>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox"[id]="interest.category" (change)="addNewInterests($event, interest.category)">
+              {{interest.category}}
+            </label>
+          </div>
+        </ng-template>
+
+      </div>
+
+      <button class="btn btn-primary" (click)="submitInterests()">Submit</button>
+    </fieldset>
+  </div>
+</div>
+
+<h2 class="text-center">Read Books</h2>
+
+<div *ngIf="readBooks.length > 0; else noRead">
+
+<div style="margin-top: 2.5%;">
+  <div *ngFor="let book of readBooks">
+<app-book-display [book]="book"></app-book-display>
+
+</div>
+</div>
+  </div>
+  <ng-template #noRead><h2 class="text-center">No Read Books Found!</h2></ng-template>
+
+
+  <div *ngIf="recommendations.length > 0; else noBooks">
+  <h2 class="text-center">Recommendations</h2>
+
+  <div style="margin-top: 2.5%;">
+    <div *ngFor="let book of recommendations">
+  <app-book-display [book]="book"></app-book-display>
+
+  </div>
+  </div>
+</div>
+
+<ng-template #noBooks><h2 class="text-center">Add some interests and Books to your reading list for reccomendations!</h2></ng-template>

@@ -1,0 +1,42 @@
+<h2 class="text-center">Average Rating: {{averageRating}}%</h2>
+<div class="progress" style="width: 40%; margin-left: 30%;">
+  <div class="progress-bar" role="progressbar" [ngStyle]="{'width': averageRating + '%'}" aria-valuenow="" aria-valuemin="0" aria-valuemax="100"
+  [matTooltip]="'Total Ratings: ' + totalRatings"
+  [matTooltipPosition]="'right'" >
+</div>
+</div>
+<h2 class="text-center">Rating Distribution</h2>
+
+<div *ngFor="let rating of ratingDistribution">
+  <h2 class="text-left" style="margin-left: 30%;">{{rating.rating}}*</h2>
+  <h2 class="text-right" style="margin-right: 30%;">{{rating.percentage}}%</h2>
+<div class="progress" style="width: 40%; margin-left: 30%;">
+  <div class="progress-bar" role="progressbar" [ngStyle]="{'width': rating.percentage + '%'}" aria-valuenow="" aria-valuemin="0" aria-valuemax="100"
+  [matTooltip]="'Total Ratings: ' + rating.ratings.length"
+  [matTooltipPosition]="'right'" >
+</div>
+</div>
+
+</div>
+
+
+
+<form>
+  <div class="form-row" style="max-width: 50%; margin-top: 5%;margin-left: 30%;">
+
+    <div class="col">
+      <select class="custom-select" (change)="captureRating($event.target.value)">
+        <option selected="">Choose A Rating</option>
+        <option [value]="1">1</option>
+        <option [value]="2">2</option>
+        <option [value]="3">3</option>
+        <option [value]="4">4</option>
+        <option [value]="5">5</option>
+      </select>
+    </div>
+    <div class="col">
+  <button class="btn btn-primary" (click)="submitRating()">Add Rating</button>
+    </div>
+  </div>
+</form>
+

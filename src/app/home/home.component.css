@@ -1,0 +1,17 @@
+
+.container {
+  padding-top: 10px;
+  text-align: center;
+  border-style: solid;
+  border-left: white;
+  border-right: white;
+  border-color: #673AB7;
+}
+h2 {
+  color: white;
+}
+p {
+  color: white;
+}
+
+

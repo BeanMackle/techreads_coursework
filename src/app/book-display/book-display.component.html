@@ -1,0 +1,13 @@
+<div class="jumbotron text-center" style="width: 80%; margin-left: 10%;">
+  <h1 class="display-3">{{book.title}}</h1>
+  <p class="lead">{{book.description}}</p>
+  <br>
+  <hr class="my-4">
+  <img [src]="book.image">
+  <br>    <br>
+  <p>{{book.year}}, {{book.authors}}</p>
+  <p class="lead">
+    <button class="btn btn-primary" style="left: 0%;" mat-raised-button color="primary" (click)="viewBook()">View</button>
+  </p>
+
+</div>

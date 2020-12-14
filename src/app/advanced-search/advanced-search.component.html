@@ -1,0 +1,25 @@
+
+<form>
+  <div class="form-row" style="max-width: 100%; margin-top: 5%;margin-left: 25%;">
+    <div class="col">
+  <input type="email" class="form-control" placeholder="Enter Search"(keyup)="captureSearchTerm($event.target.value)">
+    </div>
+    <div class="col">
+      <select class="custom-select" (change)="changeSearchType($event.target.value)">
+        <option selected="">Choose A search Parameter</option>
+        <option *ngFor="let param of searchEnum" [value]="param">{{param}}</option>
+      </select>
+    </div>
+    <div class="col">
+  <button class="btn btn-primary" (click)="submitSearch()">Search</button>
+    </div>
+  </div>
+</form>
+
+
+<div style="margin-top: 2.5%;">
+  <div *ngFor="let book of foundBooks">
+<app-book-display [book]="book"></app-book-display>
+
+</div>
+</div>

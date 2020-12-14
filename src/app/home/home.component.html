@@ -1,0 +1,16 @@
+
+  <div class="container">
+    <h2>Welcome To TechReads!</h2>
+    <p>TechReads is the place to end the hunt of finding your next Tech Book.</p>
+    <p>Browse Books, reviews/ratings and provide your own to contribute to like minded readers!</p>
+  </div>
+
+
+  <div class="container">
+    <h2>Featured Books!</h2>
+    <mat-grid-list cols="2" rowHeight="2:1">
+      <mat-grid-tile *ngFor="let book of featuredBooks">
+        <app-book-card [book]="book"></app-book-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>

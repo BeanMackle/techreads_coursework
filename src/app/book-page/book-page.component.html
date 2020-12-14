@@ -1,0 +1,50 @@
+<div *ngIf="loaded">
+
+
+  <div class="jumbotron text-center" style="width: 80%; margin-left: 10%;">
+    <h1 class="display-3">{{book.title}}</h1>
+    <p class="lead">{{book.description}}</p>
+    <br>
+    <hr class="my-4">
+    <img [src]="book.image">
+    <br>    <br>
+    <p>{{book.year}}, {{book.authors}}</p>
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" href="https://www.amazon.co.uk/s?k={{book.isbn}}" role="button">Find On Amazon</a>
+    </p>
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" href="https://www.google.com/search?tbm=bks&q={{book.isbn}}" role="button">Find On Google</a>
+    </p>
+
+    <app-ratings
+      [ratings]="book.ratings"
+      [bookId]="book.id">
+  </app-ratings>
+
+
+  <div  style="margin-top: 2%;" *ngIf="user;">
+    <h2 style="margin-top: 2%;">Reading History</h2>
+    <div  style="margin-top: 2%;" *ngIf="!read && user; else readBlock">
+    <h2>Add to Your Reading History!</h2>
+    <mat-form-field appearance="fill">
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="picker" (dateChange)="dateChange($event.target.value)">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+      <button type="submit" class="btn btn-primary" style="margin-left: 2%;" (click)="addToReadingHistory()">Add To reading History</button>
+    </div>
+    </div>
+
+<ng-template #readBlock><p style="margin-top: 2%;">In your reading History read at {{dateReadString}}</p></ng-template>
+
+<h2 class="text-center" style="margin-top: 5%;">Reviews</h2>
+
+
+<app-review
+[reviews]="book.reviews"
+[bookId]="book.id"
+[user]="user">
+
+</app-review>
+</div>

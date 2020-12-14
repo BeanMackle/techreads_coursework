@@ -1,0 +1,30 @@
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color:  #375a7f !important;
+ }
+
+ ::ng-deep.mat-form-field-underline {
+  /*change color of underline*/
+  background-color:  #375a7f !important;
+ }
+
+ ::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color:  #375a7f !important;
+ }
+
+ ::ng-deep .mat-form-field-label {
+  /*change color of label*/
+  color:  white !important;
+ }
+
+
+ ::ng-deep .mat-datepicker {
+  /*change color of label*/
+  color:  #375a7f !important;
+ }
+
+
+ mat-datepicker-toggle {
+  color:  #375a7f !important;
+ }
