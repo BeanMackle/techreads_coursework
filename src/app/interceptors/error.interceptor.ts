@@ -19,6 +19,12 @@ export class ErrorInterceptor implements HttpInterceptor {
    */
   constructor(private responseService: ResponseService) {}
 
+  /**
+   * Shows error dialog for any http response that cointains an error status code
+   * @param {HttpRequest<any>} request  The http request
+   * @param {HttpHandler} next  The http handler
+   * @returns Observable
+   */
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(request).pipe(catchError(err => {
             if (err.status === 404) {

@@ -10,17 +10,35 @@ import { ReviewService } from '../services/review.service';
   templateUrl: './review.component.html',
   styleUrls: ['./review.component.css']
 })
+/**
+ * Component for displaying and submitting reviews for a book
+ */
 export class ReviewComponent implements OnInit {
 
 
+   /**
+    * Reviews of a book
+    */
   @Input() reviews: [];
 
+   /**
+    * id of the book
+    */
   @Input() bookId: string;
 
+   /**
+    * Current User
+    */
   @Input() user: User;
 
+   /**
+    * holds the current review to be posted
+    */
   review: string;
 
+   /**
+    * defines whether a submitted review should be posted anonmysouly
+    */
   anon = true;
 
   constructor(private reviewService: ReviewService, private responseService: ResponseService, private userService: UserService) { }
@@ -28,6 +46,9 @@ export class ReviewComponent implements OnInit {
   ngOnInit(): void {
   }
 
+   /**
+    * Submits a review
+    */
   submitReview(): void{
     if (this.review.length > 0){
     const review = document.getElementById('review');
@@ -47,13 +68,23 @@ export class ReviewComponent implements OnInit {
       this.responseService.displayDialog(ResponseType.Unknown, 'Please Enter Some text to submit a review!');
     }
   }
+   /**
+    * Updates anon property via checkbox
+    */
   anonReview(event): void{
-    this.anon = event.target.checked;
+    this.anon = event;
   }
 
+   /**
+    * Updates review property via textbox
+    */
   captureUserReview(value: string): void {
     this.review = value;
   }
+
+   /**
+    * Appends a succeesfully submitted review
+    */
   appendReview(review: string, reviewer: string): void{
 
 

@@ -1,4 +1,6 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { NotificationToastComponent } from './notification-toast.component';
 
@@ -8,7 +10,10 @@ describe('NotificationToastComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NotificationToastComponent ]
+      declarations: [ NotificationToastComponent ],
+      providers: [{provide: MatDialog, useValue: {}},  { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MatDialogRef, useValue: {} }],
+        imports: [HttpClientTestingModule]
     })
     .compileComponents();
   }));

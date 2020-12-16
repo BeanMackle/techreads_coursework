@@ -14,13 +14,39 @@ import { getReccomendations } from '../models/recommendations-helper';
 })
 export class InterestsComponent implements OnInit {
 
+  /**
+   * User interests
+   */
   userInterests: Array<Interest> = new Array<Interest>();
+
+  /**
+   * Book categories
+   */
   categories: Array<string> = new Array<string>();
+
+  /**
+   * Array of built up interests
+   */
   displayInterest: Array<DisplayInterests> = new Array<DisplayInterests>();
+
+  /**
+   * Interests user has selceted to add
+   */
   InterestsToAdd: Array<Interest> = new Array<Interest>();
+
+  /**
+   * Books the User has Read
+   */
   readBooks: Array<Book> = new Array<Book>();
+
+  /**
+   * The current user
+   */
   user: User;
 
+  /**
+   * Reccomended Books
+   */
   recommendations: Array<Book> = new Array<Book>();
 
   constructor(private bookService: BookService, private userService: UserService, private responseService: ResponseService) {
@@ -42,6 +68,10 @@ export class InterestsComponent implements OnInit {
     }
   }
 
+  /**
+   * Checks there is a user
+   * @returns boolean
+   */
   checkUserExists(): boolean {
     this.user = this.userService.getUser();
 
@@ -51,6 +81,9 @@ export class InterestsComponent implements OnInit {
     return true;
   }
 
+  /**
+   * Loads the user's book reccomendations
+   */
   loadReccomendations(): void {
     if (this.checkUserExists() && this.user.storedInterests && this.user.storedReads){
       this.bookService.getAllBooks().subscribe((books) => {
@@ -63,6 +96,9 @@ export class InterestsComponent implements OnInit {
     }
   }
 
+  /**
+   * Load all available Book categories
+   */
   loadBookCategories(): void{
     this.bookService.getBookCategories().subscribe((data) => {
         if (data !== null || data !== undefined){
@@ -74,6 +110,9 @@ export class InterestsComponent implements OnInit {
     });
   }
 
+  /**
+   * Load User's interests
+   */
   loadUserInterests(): void{
     this.loadBookCategories();
 
@@ -89,6 +128,9 @@ export class InterestsComponent implements OnInit {
   }
 }
 
+  /**
+   * Load Books User has read
+   */
   loadReadBooks(): void{
     if (this.checkUserExists() && this.user.storedReads === true){
     this.userService.getUserHistory().subscribe((data) => {
@@ -101,8 +143,13 @@ export class InterestsComponent implements OnInit {
   }
  }
 
-  addNewInterests(event, interest: string): void {
-    if  (event.target.checked){
+  /**
+   * @param {boolean} checked status of checkbox
+   * @param {string} interest the interest name
+   *  Adds or Removes interest that user is interested in
+   */
+  addNewInterests(checked, interest: string): void {
+    if  (checked){
         const newInterest: Interest = {
           topic: interest,
           user: this.userService.getUser().username,
@@ -110,11 +157,14 @@ export class InterestsComponent implements OnInit {
 
         this.InterestsToAdd.push(newInterest);
     }
-    else if (!event.checked){
+    else if (!checked){
       this.InterestsToAdd = this.InterestsToAdd.filter(x => x.topic !== interest);
     }
   }
 
+  /**
+   * Submits new User interests
+   */
   submitInterests(): void{
     if  (this.InterestsToAdd.length > 0){
       this.InterestsToAdd.forEach((interest) => {

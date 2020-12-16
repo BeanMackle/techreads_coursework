@@ -12,25 +12,49 @@ import { Book, History, ResponseType, User } from '../models';
   templateUrl: './book-page.component.html',
   styleUrls: ['./book-page.component.css']
 })
+
+/**
+ * Book Page Component
+ */
 export class BookPageComponent implements OnInit {
 
+  /**
+   * Date user has read
+   */
   dateRead: Date;
 
-  book: Book;
+   /**
+    * The Book to display
+    */
+    book: Book;
 
-  averageRating: string;
 
-  loaded = false;
+  /**
+   * Boolean to determine if api data been loaded
+   */
+   loaded = false;
 
-  bookId: string;
 
+
+  /**
+   * The id of the book
+   */
+   bookId: string;
+
+  /**
+ * Has User read the book
+ */
   read = false;
 
-  review: string;
-
+  /**
+ * formatted date to display if user has read the book
+ */
   dateReadString: string;
 
-  user: User;
+  /**
+   * The user currently viewing the page
+   */
+   user: User;
 
   /**
    * constructor
@@ -46,6 +70,9 @@ export class BookPageComponent implements OnInit {
 
   }
 
+  /**
+   * Function to get the user if they have an account
+   */
   private getUser(): void {
     const user = this.userService.getUser();
 
@@ -57,6 +84,9 @@ export class BookPageComponent implements OnInit {
     }
   }
 
+   /**
+    * Function to get the book using the id present in the route
+    */
  private getBook(): void{
    this.service.getBookById(this.bookId).subscribe((data: Book) => {
         this.book = data[0];
@@ -64,6 +94,9 @@ export class BookPageComponent implements OnInit {
     });
   }
 
+   /**
+    * If user is present, Load their book history
+    */
   getUserHistory(): void{
     if (this.user && this.user.storedReads){
     this.userService.getUserHistory().subscribe((data) => {
@@ -78,22 +111,25 @@ export class BookPageComponent implements OnInit {
   }
 
 
+   /**
+    * Capture date from date picker input
+    * @param {Date} value Date Value
+    */
   dateChange(value: Date): void{
 
     this.dateRead =  value;
   }
 
+   /**
+    * Adds this book to users reading history
+    */
   addToReadingHistory(): void{
-
-
     if (this.dateRead !== undefined){
     const history: History = {
      user: this.userService.getUser().username,
      book: this.bookId,
      date: this.dateRead,
     };
-
-
 
     this.userService.postUserHistory(history).subscribe((data) => {
       this.dateReadString =  new Date(history.date).toDateString();
@@ -105,31 +141,6 @@ export class BookPageComponent implements OnInit {
   }
   else{
     this.responseService.displayDialog(ResponseType.NotFound, 'You must enter a date!');
-  }
-
-  }
-
-  submitReview(): void{
-    if (this.review.length > 0){
-    const review = document.getElementById('review');
-    this.reviewService.submitReview(this.review, 'anon', this.bookId);
-    this.appendReview(this.review, 'anon');
     }
-    else  {
-      this.responseService.displayDialog(ResponseType.Unknown, 'Please Enter Some text to submit a review!');
-    }
-  }
-
-  captureUserReview(value: string): void {
-    this.review = value;
-  }
-  appendReview(review: string, reviewer: string): void{
-
-    const elements = '<div class="text-left border border-primary" style="margin-top: 1%;"><h3>' + reviewer + '</h3><p>' + review + '</p></div>';
-
-    const reviews = document.getElementById('reviews');
-
-    reviews.insertAdjacentHTML('afterbegin', elements);
-
   }
 }

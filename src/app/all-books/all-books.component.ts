@@ -7,11 +7,22 @@ import { Book } from '../models';
   templateUrl: './all-books.component.html',
   styleUrls: ['./all-books.component.css']
 })
+
+/**
+ * component for displaying all books
+ */
 export class AllBooksComponent implements OnInit {
 
+/**
+ * Found books
+ */
   books: Array<Book> = new Array<Book>();
+
   constructor(private bookService: BookService) { }
 
+   /**
+    * Get Books upon page load
+    */
   ngOnInit(): void {
     this.bookService.getAllBooks().subscribe((books) => {
       this.books = books;

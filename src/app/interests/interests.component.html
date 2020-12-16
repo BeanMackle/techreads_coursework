@@ -16,7 +16,7 @@
         <ng-template #nonInterest>
           <div class="form-check">
             <label class="form-check-label">
-              <input class="form-check-input" type="checkbox"[id]="interest.category" (change)="addNewInterests($event, interest.category)">
+              <input class="form-check-input" type="checkbox"[id]="interest.category" (change)="addNewInterests($event.target.checked, interest.category)">
               {{interest.category}}
             </label>
           </div>

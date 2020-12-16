@@ -52,6 +52,7 @@ import { ReviewComponent } from './review/review.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     LayoutModule,
     MatGridListModule,
     MatFormFieldModule,

@@ -7,15 +7,26 @@ import { Router } from '@angular/router';
   templateUrl: './book-card.component.html',
   styleUrls: ['./book-card.component.css']
 })
+
+/**
+ * Book Card Component
+ */
 export class BookCardComponent implements OnInit {
 
+/**
+ * Book Input for displaying on card
+ */
   @Input() book: Book;
+
   constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
-   viewBook(id: number): void{
-    this.router.navigateByUrl(`/book/${id.toString()}`);
+  /**
+   * Function to redirect user to selected Book
+   */
+   viewBook(): void{
+    this.router.navigateByUrl(`/book/${this.book.id}`);
   }
 }

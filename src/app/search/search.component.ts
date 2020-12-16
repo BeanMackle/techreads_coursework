@@ -8,10 +8,14 @@ import { BookService } from '../services/book.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
+/**
+ * component for book title search only
+ */
 export class SearchComponent implements OnInit {
 
   searchTerm: string;
   foundBooks: Array<Book> = new Array<Book>();
+
 
   constructor(private route: ActivatedRoute, private books: BookService) { }
 
@@ -21,6 +25,9 @@ export class SearchComponent implements OnInit {
     this.findBooks();
   }
 
+   /**
+    * Finds book based off search parameters
+    */
   findBooks(): void {
     this.foundBooks = new Array<Book>();
     this.books.search(this.searchTerm, SearchType.Title).subscribe((data: Book) => {
@@ -28,6 +35,9 @@ export class SearchComponent implements OnInit {
   });
   }
 
+   /**
+    * Submits search
+    */
   search(newTerm: string): void {
     this.searchTerm = newTerm;
 

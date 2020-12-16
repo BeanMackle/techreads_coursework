@@ -25,13 +25,13 @@
   <div class="form-row" style="max-width: 50%; margin-top: 5%;margin-left: 30%;">
 
     <div class="col">
-      <select class="custom-select" (change)="captureRating($event.target.value)">
-        <option selected="">Choose A Rating</option>
-        <option [value]="1">1</option>
-        <option [value]="2">2</option>
-        <option [value]="3">3</option>
-        <option [value]="4">4</option>
-        <option [value]="5">5</option>
+      <select class="custom-select" (change)="captureRating($event.target.value)" >
+        <option  class ="selected "selected="">Choose A Rating</option>
+        <option class="option" (click)="captureRating('1')" [value]="1">1</option>
+        <option class="option" (click)="captureRating('2')"[value]="2">2</option>
+        <option class="option" (click)="captureRating('3')"[value]="3">3</option>
+        <option class="option" (click)="captureRating('4')"[value]="4">4</option>
+        <option class="option" (click)="captureRating('5')"[value]="5">5</option>
       </select>
     </div>
     <div class="col">

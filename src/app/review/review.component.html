@@ -14,7 +14,7 @@
 
   <div class="form-check">
     <label class="form-check-label" *ngIf="user">
-      <input class="form-check-input" id="anon" type="checkbox" value="" checked="" (change)="anonReview($event)">
+      <input class="form-check-input" id="anon" type="checkbox" value="" checked="" (change)="anonReview($event.target.checked)">
       Post Anonymously
     </label>
     <button type="submit" class="btn btn-primary" style="margin-left: 1%;" (click)="submitReview()">Post</button>

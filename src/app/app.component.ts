@@ -2,7 +2,7 @@ import { UserService } from './services/user.service';
 import { BookService } from './services/book.service';
 import { Observable, Subject } from 'rxjs';
 import { Component } from '@angular/core';
-import { Book} from './models';
+import { Book, User} from './models';
 import { FormControl } from '@angular/forms';
 import {Router} from '@angular/router';
 
@@ -12,15 +12,16 @@ import {Router} from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-
-
+/**
+ * Supported comment
+ */
 export class AppComponent {
   title = 'ClientApp';
   searchValue = '';
   filteredBookOptions: Observable<Book>;
   form = new FormControl();
   searchError: string;
-  foundUser: string;
+  foundUser: User;
 
   constructor(private router: Router, private userService: UserService){
     this.foundUser = this.userService.getUser();
@@ -35,8 +36,8 @@ export class AppComponent {
     }
   }
 
-  change(event): void {
-    this.searchValue = event.target.value;
+  change(value): void {
+    this.searchValue = value;
   }
 
   submitSearch(): void{

@@ -10,10 +10,20 @@ import { BookService } from '../services/book.service';
   templateUrl: './ratings.component.html',
   styleUrls: ['./ratings.component.css']
 })
+
+/**
+ * Component to calculate and display different rating stats
+ */
 export class RatingsComponent implements OnInit {
 
+   /**
+    * ratings of a book
+    */
   @Input() ratings: number[];
 
+   /**
+    * book id
+    */
   @Input() bookId: string;
 
 
@@ -40,6 +50,9 @@ export class RatingsComponent implements OnInit {
     this.getRatingDistribution();
   }
 
+   /**
+    * calculates the average rating
+    */
   private getAverageRating(): void{
     let rating = 0;
 
@@ -51,9 +64,15 @@ export class RatingsComponent implements OnInit {
     this.averageRating = this.getPercentageValue(rating / this.ratings.length).toString().substr(0, 4);
   }
 
+   /**
+    * calculates percentage value for ratings
+    * @param {number} rating
+    * @returns percentage number
+    */
   private getPercentageValue(rating: number): number{
     return (rating / 5) * 100;
   }
+
 
   getTotalRatings(): void {
     this.totalRatings = this.ratings.length;
@@ -64,6 +83,9 @@ export class RatingsComponent implements OnInit {
     this.ratingDistribution = this.calculateDistributionPercentage(sepereatedRatings);
   }
 
+   /**
+    * Calculates the distribution of ratings
+    */
   calculateDistributionPercentage(ratings: Array<RatingDistrubtion>): Array<RatingDistrubtion>{
     ratings.forEach((ratingDis: RatingDistrubtion) => {
     ratingDis.percentage = ((ratingDis.ratings.length / this.ratings.length * 100).toString()).substr( 0, 4);
@@ -73,11 +95,14 @@ export class RatingsComponent implements OnInit {
 
   }
 
+
+  /**
+   * Seperate Ratings into individual ratings
+   */
   seperateRatings(): Array<RatingDistrubtion>{
     const ratings = new Array<RatingDistrubtion>();
     for (let i = 1; i < 6; i++) {
      const newRatings: number[] = (this.ratings.filter(x => x === i));
-
 
      const ratingsToAdd: RatingDistrubtion = {
        rating: i,
@@ -89,10 +114,17 @@ export class RatingsComponent implements OnInit {
 
     return ratings;
   }
+
+   /**
+    * Captures the rating as defined by the dropdown
+    */
   captureRating(value: string): void {
       this.userRating = +value;
   }
 
+   /**
+    * Submit new rating
+    */
   submitRating(): void{
 
     if (this.userRating > 0 && this.userRating < 6){

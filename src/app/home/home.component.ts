@@ -11,6 +11,9 @@ import { Book } from '../models';
 })
 export class HomeComponent implements OnInit {
 
+   /**
+   * Books to be shown in featured section of homepage
+   */
   featuredBooks: Array<Book>;
 
 
@@ -21,6 +24,9 @@ export class HomeComponent implements OnInit {
     this.getBooks();
   }
 
+  /**
+   * Loads some books to show on the homepage
+   */
   getBooks(): void {
     this.books.getAllBooks().subscribe((data: Array<Book>) => {
         if (data !== null || undefined){
